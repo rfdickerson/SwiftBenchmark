@@ -25,7 +25,13 @@ class SwiftBenchmarkTests: XCTestCase {
             let data = Data()
         }
 
+        suite.onComplete = { () -> Void in 
+            print(suite.testStats["create data"])
+        }
+
         suite.run()
+
+
 
     }
 

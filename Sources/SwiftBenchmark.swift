@@ -19,13 +19,21 @@ public class BenchmarkSuite {
 
     }
 
+    var testStats = [String:Double]()
+
     func run() {
 
         for test in tests {
+
             let (name, f ) = test
+
+            testStats[name] = 0.0
+
             let start = timerStart()
             f()
             let end = timerEnd(start)
+
+            testStats[name] = Double(end) + testStats[name]!
 
         }
 
