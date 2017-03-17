@@ -5,15 +5,29 @@ struct SwiftBenchmark {
     var text = "Hello, World!"
 }
 
+typealias TestFunction = (String, ()->Void)
+
 public class BenchmarkSuite {
 
     var onComplete: ((Void) -> ())?
 
-    func add(name: String, benchmarkFunction: ()->Void ) {
+    var tests = [TestFunction]()
+
+    func add(_ name: String, benchmarkFunction: @escaping ()->Void ) {
+
+        tests.append((name, benchmarkFunction))
 
     }
 
     func run() {
+
+        for test in tests {
+            let (name, f ) = test
+            let start = timerStart()
+            f()
+            let end = timerEnd(start)
+
+        }
 
         onComplete?()
 

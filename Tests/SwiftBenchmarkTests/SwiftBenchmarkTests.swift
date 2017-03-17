@@ -4,10 +4,8 @@ import XCTest
 import Foundation
 
 class SwiftBenchmarkTests: XCTestCase {
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        XCTAssertEqual(SwiftBenchmark().text, "Hello, World!")
+
+    func testTimer() {
 
         let start = timerStart()
 
@@ -19,10 +17,23 @@ class SwiftBenchmarkTests: XCTestCase {
 
     }
 
+    func testBenchmarkSuite() {
+
+        let suite = BenchmarkSuite()
+
+        suite.add("create data") {
+            let data = Data()
+        }
+
+        suite.run()
+
+    }
+
 
     static var allTests : [(String, (SwiftBenchmarkTests) -> () throws -> Void)] {
         return [
-            ("testExample", testExample),
+            ("testTimer", testTimer),
+            ("testBenchmarkSuite", testBenchmarkSuite)
         ]
     }
 }
